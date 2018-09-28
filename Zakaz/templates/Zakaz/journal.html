@@ -1,0 +1,19 @@
+{% extends "Zakaz/base.html" %}
+
+  {% load static from staticfiles %}
+
+ {% block meta_title %}dateres{% endblock meta_title %}
+
+  {% block title %}dateres{% endblock title %}
+
+  {% block content %}
+  {%for ds in day%}
+  {{ds.date}}{{ds.stol}}
+  {%endfor%}
+
+
+
+
+
+
+ {% endblock content %}

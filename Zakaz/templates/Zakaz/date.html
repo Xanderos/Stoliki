@@ -1,0 +1,68 @@
+{%extends 'Zakaz/base.html'%}
+
+{%load static from staticfiles %}
+
+
+
+{%block content%}
+<div class="row">
+<form method="post">
+{% csrf_token %}
+  <div class="col-sm-6">
+  <div class="form-group">
+    <label for="inputDate"><p>Введите дату:</p>
+    *заказ столиков производится не более чем на 15 дней заранее c {{ cur_day }} по {{last_day}}</label>
+    <input id="datepicker" placeholder="{{ cur_day }}" >
+  </div>
+  </div>
+
+</form>
+
+
+
+<div class="col-sm-3">
+<p id="journal-nav" class="text-center">
+    <a href="?day={{ prev_day }}"
+      title="previous day">&larr;</a>
+
+   <strong>{{ cur_day }}</strong>
+   <a href="?day={{ next_day }}"
+      title="Next day">&rarr;</a>
+</p>
+
+</div>
+</div>
+
+<div class="container-fluid">
+  <div class="row ">
+    {% for stol in Stol %}
+    {% ifequal stol.y_cord 1  %}
+      {% if stol.len_stol <= 1 %}
+          <div class="col-sm-3 rzal rectangle">
+            {{ stol.reserved }}
+          </div>
+      {% endif %}
+    {% endifequal %}
+
+    {% ifequal stol.y_cord 2  %}
+      {% if stol.len_stol <= 3 %}
+        <div class="col-sm-6 rzal rectangle">
+          {{ stol.reserved }}
+        </div>
+      {% endif %}
+      {% endifequal %}
+
+    {% ifequal stol.y_cord 3  %}
+    {%if stol.len_stol <= 6 %}
+      <div class="col-sm-12 rzal rectangle">
+        {{ stol.reserved }}
+      </div>
+    {% endif %}
+    {% endifequal %}
+    {% endfor %}
+    </div>
+
+</div>
+
+<a class="btn btn-primary" href="#" role="button">заказать</a>
+{%endblock content%}

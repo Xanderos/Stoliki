@@ -7,6 +7,6 @@ from Zakaz import views
 
 urlpatterns = [
 
-    path('',views.zakaz,name='home'),
-
+    path('zak',views.DateView.as_view(),name='home'),
+    path('',views.JournalView.as_view(), name='journal'),
     ]
